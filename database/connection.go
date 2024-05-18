@@ -2,6 +2,7 @@ package database
 
 import (
 	"github.com/Abdulkader-Safi/Go-Auth-jwt-Fiber/models"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
