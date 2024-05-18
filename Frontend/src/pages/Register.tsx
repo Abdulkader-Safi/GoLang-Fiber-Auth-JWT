@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "../utils/types/UserType";
+import { UserRegister } from "../utils/types/UserType";
 
 interface IPorp {}
 
@@ -8,13 +8,13 @@ interface IPorp {}
 const Register = ({}: IPorp) => {
   const navigate = useNavigate();
 
-  const [user, setUser] = useState<User>({
+  const [user, setUser] = useState<UserRegister>({
     name: "",
     email: "",
     password: "",
   });
 
-  const handelRegister = async (e: SyntheticEvent) => {
+  const submitRegister = async (e: SyntheticEvent) => {
     e.preventDefault();
 
     const response = await fetch("http://localhost:3030/api/register", {
@@ -31,7 +31,7 @@ const Register = ({}: IPorp) => {
   };
 
   return (
-    <form onSubmit={handelRegister}>
+    <form onSubmit={submitRegister}>
       <h1 className="h3 mb-3 fw-normal">Please register</h1>
 
       <input
