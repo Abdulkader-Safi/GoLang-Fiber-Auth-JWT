@@ -1,1 +1,1 @@
-# GoLang Fiber API Authentication with JWT
+# Golang Auth with (JWT, Fiber) and (React, Typescript)
