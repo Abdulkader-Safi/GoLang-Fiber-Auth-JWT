@@ -2,10 +2,12 @@ import { SyntheticEvent, useState } from "react";
 import { UserLogin } from "../utils/types/UserType";
 import { Navigate } from "react-router-dom";
 
-interface IPorp {}
+interface IPorp {
+  resetUser: () => void;
+}
 
 // eslint-disable-next-line no-empty-pattern
-const Login = ({}: IPorp) => {
+const Login = ({ resetUser }: IPorp) => {
   const [redirect, setRedirect] = useState<boolean>(false);
 
   const [user, setUser] = useState<UserLogin>({
@@ -24,6 +26,7 @@ const Login = ({}: IPorp) => {
     });
 
     if (response.status === 200) {
+      resetUser();
       setRedirect(true);
     } else {
       alert("Something went wrong, please try again later");

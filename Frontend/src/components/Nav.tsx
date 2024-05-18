@@ -2,17 +2,11 @@ import { Link } from "react-router-dom";
 
 interface IPorp {
   name: string | null;
-  setName: (
-    name: {
-      id: number;
-      name: string;
-      email: string;
-    } | null,
-  ) => void;
+  resetUser: () => void;
 }
 
 // eslint-disable-next-line no-empty-pattern
-const Nav = ({ name, setName }: IPorp) => {
+const Nav = ({ name, resetUser }: IPorp) => {
   const logout = async () => {
     await fetch("http://localhost:3030/api/logout", {
       method: "POST",
@@ -20,7 +14,7 @@ const Nav = ({ name, setName }: IPorp) => {
       credentials: "include",
     });
 
-    setName(null);
+    resetUser();
   };
 
   let menu;

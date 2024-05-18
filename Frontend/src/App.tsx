@@ -11,29 +11,45 @@ function App() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    (async () => {
-      const responce = await fetch("http://localhost:3030/api/user", {
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-
-      if (responce.status === 200) {
-        const userData: User = await responce.json();
-        setUser(userData);
-      }
-
-      console.log(2);
-    })();
+    getUser();
   }, []);
+
+  const getUser = async () => {
+    const responce = await fetch("http://localhost:3030/api/user", {
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+
+    if (responce.status === 200) {
+      const userData: User = await responce.json();
+      setUser(userData);
+    }
+
+    console.log(2);
+  };
 
   return (
     <div className="App">
-      <Nav name={user?.name || ""} setName={setUser} />
+      <Nav
+        name={user?.name || ""}
+        resetUser={() => {
+          setUser(null);
+        }}
+      />
 
       <main className="form-signin">
         <Routes>
           <Route path="/" element={<Home user={user} />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                resetUser={() => {
+                  getUser();
+                }}
+              />
+            }
+          />
           <Route path="/register" element={<Register />} />
         </Routes>
       </main>
