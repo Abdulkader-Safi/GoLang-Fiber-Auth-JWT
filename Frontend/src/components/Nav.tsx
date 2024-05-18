@@ -1,34 +1,67 @@
 import { Link } from "react-router-dom";
 
-interface IPorp {}
+interface IPorp {
+  name: string | null;
+  setName: (
+    name: {
+      id: number;
+      name: string;
+      email: string;
+    } | null,
+  ) => void;
+}
 
 // eslint-disable-next-line no-empty-pattern
-const Nav = ({}: IPorp) => {
+const Nav = ({ name, setName }: IPorp) => {
+  const logout = async () => {
+    await fetch("http://localhost:3030/api/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+
+    setName(null);
+  };
+
+  let menu;
+
+  if (name === "") {
+    menu = (
+      <ul className="navbar-nav me-auto mb-2 mb-md-0">
+        <li className="nav-item active">
+          <Link to="/login" className="nav-link">
+            Login
+          </Link>
+        </li>
+        <li className="nav-item active">
+          <Link to="/register" className="nav-link">
+            Register
+          </Link>
+        </li>
+      </ul>
+    );
+  } else {
+    menu = (
+      <ul className="navbar-nav me-auto mb-2 mb-md-0">
+        <li className="nav-item active">
+          <Link to="/login" className="nav-link" onClick={logout}>
+            Logout
+          </Link>
+        </li>
+      </ul>
+    );
+  }
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link to="/" className="navbar-brand">
           Home
         </Link>
 
-        <div className="collapse navbar-collapse" id="navbarCollapse">
-          <ul className="navbar-nav me-auto mb-2 mb-md-0">
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/register">
-                Register
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <div>{menu}</div>
       </div>
     </nav>
   );
 };
-
 export default Nav;
