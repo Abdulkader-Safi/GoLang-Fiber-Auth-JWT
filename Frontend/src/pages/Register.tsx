@@ -1,13 +1,8 @@
 import { SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { User } from "../utils/types/UserType";
 
 interface IPorp {}
-
-type User = {
-  name: string;
-  email: string;
-  password: string;
-};
 
 // eslint-disable-next-line no-empty-pattern
 const Register = ({}: IPorp) => {

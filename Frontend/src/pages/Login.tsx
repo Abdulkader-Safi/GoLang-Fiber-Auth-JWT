@@ -1,7 +1,16 @@
+import { useState } from "react";
+import { User } from "../utils/types/UserType";
+
 interface IPorp {}
 
 // eslint-disable-next-line no-empty-pattern
 const Login = ({}: IPorp) => {
+  const [user, setUser] = useState<User>({
+    name: "",
+    email: "",
+    password: "",
+  });
+
   return (
     <form>
       <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
