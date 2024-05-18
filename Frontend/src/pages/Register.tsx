@@ -1,12 +1,12 @@
 import { SyntheticEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { UserRegister } from "../utils/types/UserType";
 
 interface IPorp {}
 
 // eslint-disable-next-line no-empty-pattern
 const Register = ({}: IPorp) => {
-  const navigate = useNavigate();
+  const [redirect, setRedirect] = useState<boolean>(false);
 
   const [user, setUser] = useState<UserRegister>({
     name: "",
@@ -24,11 +24,15 @@ const Register = ({}: IPorp) => {
     });
 
     if (response.status === 200) {
-      return navigate("/login");
+      setRedirect(true);
     } else {
       alert("Something went wrong, please try again later");
     }
   };
+
+  if (redirect) {
+    return <Navigate to={"/login"} />;
+  }
 
   return (
     <form onSubmit={submitRegister}>
