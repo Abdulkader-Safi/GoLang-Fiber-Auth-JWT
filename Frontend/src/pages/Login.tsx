@@ -8,14 +8,14 @@ const Login = ({}: IPorp) => {
 
       <input
         type="email"
-        className="form-control"
+        className="form-control my-2 rounded"
         placeholder="Email Address"
         required
       />
 
       <input
         type="password"
-        className="form-control"
+        className="form-control my-2 rounded"
         placeholder="Password"
         required
       />
