@@ -4,9 +4,9 @@ const _layout = () => {
   return (
     <Stack>
       <Stack.Screen
-        name="index"
+        name="(draw)"
         options={{
-          title: "Welcome",
+          headerShown: false,
         }}
       />
     </Stack>
